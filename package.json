@@ -1,0 +1,26 @@
+{
+  "name": "golden-raspberry-awards-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "test",
+    "start": "node --watch src/server.js"
+  },
+  "author": "Adriano Mantovani",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "better-sqlite3": "11.8.1",
+    "csv-parser": "3.2.0",
+    "express": "4.21.2"
+  },
+  "devDependencies": {
+    "eslint": "9.19.0",
+    "eslint-config-prettier": "10.0.1",
+    "eslint-plugin-prettier": "5.2.3",
+    "@eslint/js": "9.17.0",
+    "@eslint/eslintrc": "3.2.0",
+    "globals": "15.14.0"
+  }
+}
