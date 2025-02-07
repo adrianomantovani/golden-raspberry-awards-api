@@ -20,10 +20,24 @@ describe('Given a csv file', () => {
     server.close(() => done());
   });
 
+  const csvData = fs.readFileSync(CSV_FILE_PATH, 'utf-8');
+
+  test('Expect to have the correct set of columns', async () => {
+    const csvColumns = csvData.slice(0, 35).split(';');
+
+    expect(csvColumns).toEqual(
+      expect.arrayContaining([
+        'year',
+        'title',
+        'studios',
+        'producers',
+        'winner',
+      ])
+    );
+  });
+
   test('Expect the databese to have the same number of rows', async () => {
     await request(server).get('/');
-
-    const csvData = fs.readFileSync(CSV_FILE_PATH, 'utf-8');
     const csvLines = csvData.split('\n').filter((line) => line.trim() !== '');
     const csvCount = csvLines.length - 1;
 
