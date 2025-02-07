@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "test",
-    "start": "node --watch src/server.js"
+    "start": "node --watch server.js"
   },
   "author": "Adriano Mantovani",
   "license": "ISC",

@@ -1,9 +1,9 @@
 import express from 'express';
-import routes from './routes.js';
-import db from './database.js';
-
 import csv from 'csv-parser';
 import fs from 'fs';
+
+import db from './database.js';
+import routes from './src/routes.js';
 
 const app = express();
 const PORT = 3333;
