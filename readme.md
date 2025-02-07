@@ -37,15 +37,15 @@ A aplicação será iniciada e estará ouvindo na porta 3333
 
 Rotas GET:
 
-[http://localhost:3333/intervals](http://localhost:3333/intervals) - lista o produtor com o maior intervalo entre dois prêmios consecutivos, e o que obteve dois prêmios mais rápido (conforme especificação de formato)
+[http://localhost:3333/intervals](http://localhost:3333/intervals) - lista o produtor com o maior intervalo entre dois prêmios consecutivos, e o que obteve dois prêmios mais rápido (conforme especificação de formato).
 
-[http://localhost:3333/winners](http://localhost:3333/winners) - lista individual dos produtores que já venceram o prêmio, ordenada por ano
+[http://localhost:3333/winners](http://localhost:3333/winners) - lista individual dos produtores que já venceram o prêmio, ordenada por ano.
 
-[http://localhost:3333/movies](http://localhost:3333/movies) - lista de todos os filmes (convertido do arquivo "Movielist.csv")
+[http://localhost:3333/movies](http://localhost:3333/movies) - lista de todos os filmes (convertido do arquivo "Movielist.csv").
 
 ### Para executar os testes de integração
 
-Sem a aplicação estar rodando, é possível rodar os testes de integração criados através do seguinte comando no terminal:
+Sem a aplicação estar rodando, é possível rodar os testes de integração criados, através do seguinte comando no terminal:
 
 ```
 npm test
