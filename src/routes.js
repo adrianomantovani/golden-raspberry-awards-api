@@ -42,9 +42,6 @@ routes.get('/intervals', (req, res) => {
       });
     } else {
       const interval = winner.year - foundOne.year;
-      console.log(' ---- Achou ----');
-      console.log({ producer: winner.producer });
-      console.log({ interval });
 
       masterTable.push({
         producer: winner.producer,
@@ -64,8 +61,6 @@ routes.get('/intervals', (req, res) => {
       if (interval > maxCount) maxCount = interval;
     }
   });
-
-  console.log({ minCount, maxCount });
 
   const min = masterTable.filter((row) => row.interval === minCount);
 
