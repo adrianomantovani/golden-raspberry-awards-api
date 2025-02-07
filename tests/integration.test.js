@@ -34,3 +34,29 @@ describe('Given a csv file', () => {
     expect(rowCount).toBe(csvCount);
   });
 });
+
+describe('When calling routes', () => {
+  describe('GET /movies', () => {
+    test('should respond with a 200 status code', async () => {
+      const response = await request(app).get('/movies').send();
+
+      expect(response.statusCode).toBe(200);
+    });
+  });
+
+  describe('GET /winners', () => {
+    test('should respond with a 200 status code', async () => {
+      const response = await request(app).get('/winners').send();
+
+      expect(response.statusCode).toBe(200);
+    });
+  });
+
+  describe('GET /intervals', () => {
+    test('should respond with a 200 status code', async () => {
+      const response = await request(app).get('/intervals').send();
+
+      expect(response.statusCode).toBe(200);
+    });
+  });
+});
