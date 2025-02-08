@@ -79,8 +79,33 @@ describe('When calling routes', () => {
   describe('GET /intervals', () => {
     test('should respond with a 200 status code', async () => {
       const response = await request(app).get('/intervals').send();
-
       expect(response.statusCode).toBe(200);
+    });
+
+    test('should return the expected JSON structure', async () => {
+      const response = await request(app).get('/intervals').send();
+      expect(response.body).toHaveProperty('min');
+      expect(response.body).toHaveProperty('max');
+      expect(Array.isArray(response.body.min)).toBe(true);
+      expect(Array.isArray(response.body.max)).toBe(true);
+    });
+
+    test('should return objects with correct properties when non-empty', async () => {
+      const response = await request(app).get('/intervals').send();
+
+      const validateItem = (item) => {
+        expect(item).toHaveProperty('producer');
+        expect(typeof item.producer).toBe('string');
+        expect(item).toHaveProperty('interval');
+        expect(typeof item.interval).toBe('number');
+        expect(item).toHaveProperty('previousWin');
+        expect(typeof item.previousWin).toBe('number');
+        expect(item).toHaveProperty('followingWin');
+        expect(typeof item.followingWin).toBe('number');
+      };
+
+      response.body.min.forEach(validateItem);
+      response.body.max.forEach(validateItem);
     });
   });
 });
