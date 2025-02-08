@@ -6,7 +6,6 @@ import db from './database.js';
 import routes from './src/routes.js';
 
 const app = express();
-const PORT = 3333;
 
 app.use(express.json());
 app.use(routes);

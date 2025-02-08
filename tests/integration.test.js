@@ -22,18 +22,28 @@ describe('Given a csv file', () => {
 
   const csvData = fs.readFileSync(CSV_FILE_PATH, 'utf-8');
 
-  test('Expect to have the correct set of columns', async () => {
+  test('Expect the file to have the correct set of columns', () => {
     const csvColumns = csvData.slice(0, 35).split(';');
 
-    expect(csvColumns).toEqual(
-      expect.arrayContaining([
-        'year',
-        'title',
-        'studios',
-        'producers',
-        'winner',
-      ])
-    );
+    expect(Array.isArray(csvColumns)).toBe(true);
+
+    expect(csvColumns).toEqual([
+      'year',
+      'title',
+      'studios',
+      'producers',
+      'winner',
+    ]);
+  });
+
+  test('Expect each line to have at least 4 columns', () => {
+    csvData
+      .trim()
+      .split('\n')
+      .forEach((row) => {
+        const current = row.replace(/[^;]/g, '').split('').length;
+        expect(current).toBe(4);
+      });
   });
 
   test('Expect the databese to have the same number of rows', async () => {
