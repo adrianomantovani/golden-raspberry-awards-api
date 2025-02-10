@@ -36,13 +36,29 @@ describe('Given a csv file', () => {
     ]);
   });
 
-  test('Expect each line to have at least 4 columns', () => {
+  test('Expect each line to have 4 separators', () => {
     csvData
       .trim()
       .split('\n')
       .forEach((row) => {
         const current = row.replace(/[^;]/g, '').split('').length;
         expect(current).toBe(4);
+      });
+  });
+
+  test('Expect each line to have valid content', () => {
+    csvData
+      .trim()
+      .split('\n')
+      .forEach((row, i) => {
+        if (i > 0) {
+          const current = row.split(';');
+          expect(current[0].length).toBeGreaterThan(0);
+          expect(current[1].length).toBeGreaterThan(1);
+          expect(current[2].length).toBeGreaterThan(2);
+          expect(current[3].length).toBeGreaterThan(3);
+          expect(['', 'yes']).toContain(current[4]);
+        }
       });
   });
 
@@ -107,5 +123,27 @@ describe('When calling routes', () => {
       response.body.min.forEach(validateItem);
       response.body.max.forEach(validateItem);
     });
+  });
+
+  test('GET /intervals should contain producers that appear at least twice in /winners', async () => {
+    const winnersResponse = await request(app).get('/winners');
+    const winners = winnersResponse.body;
+
+    const producerWins = {};
+    winners.forEach(({ producer }) => {
+      producerWins[producer] = (producerWins[producer] || 0) + 1;
+    });
+
+    const intervalsResponse = await request(app).get('/intervals');
+    const { min, max } = intervalsResponse.body;
+
+    const validateProducers = (intervals) => {
+      intervals.forEach(({ producer }) => {
+        expect(producerWins[producer]).toBeGreaterThanOrEqual(2);
+      });
+    };
+
+    if (min.length > 0) validateProducers(min);
+    if (max.length > 0) validateProducers(max);
   });
 });
